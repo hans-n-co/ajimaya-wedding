@@ -57,7 +57,7 @@
             z-index: 9999;
             text-align: center;
             padding: 15px;
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
         #cover::before {
@@ -70,7 +70,6 @@
 
         #cover.opened {
             transform: translateY(-100%);
-            opacity: 0;
             pointer-events: none;
         }
 
@@ -167,7 +166,7 @@
             font-weight: 500;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(90, 18, 26, 0.4);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -201,13 +200,14 @@
             align-items: center;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             font-size: 1.1rem;
         }
 
         .ctrl-btn:hover {
             background: var(--maroon-hover);
             color: #ffffff;
+            transform: scale(1.05);
         }
 
         .container {
@@ -349,10 +349,12 @@
             margin-top: 10px;
         }
 
+        /* --- Improved Smooth Reveal Transitions --- */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s ease, transform 1s ease;
+            transform: translateY(35px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
         .reveal.active {
@@ -400,7 +402,7 @@
             padding: 5px;
             background: rgba(255, 255, 255, 0.6);
             cursor: pointer;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
@@ -431,7 +433,7 @@
             text-decoration: none;
             margin-top: 8px;
             margin-bottom: 8px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             font-weight: 500;
         }
 
@@ -461,7 +463,7 @@
             border-radius: 12px;
             padding: 15px 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
@@ -511,11 +513,45 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .gallery-item:hover img {
             transform: scale(1.08);
+        }
+
+        /* Gallery Modal Controls */
+        .gallery-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(90, 18, 26, 0.8);
+            color: #f6f1e9;
+            border: 1px solid var(--gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 10;
+        }
+
+        .gallery-nav-btn:hover {
+            background: var(--maroon-dark);
+            color: #ffffff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-prev {
+            left: 10px;
+        }
+
+        .gallery-next {
+            right: 10px;
         }
 
         /* Expanded & Clickable Video Section */
@@ -529,7 +565,7 @@
             background: #000;
             cursor: pointer;
             position: relative;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
         }
 
         .video-wrapper:hover {
@@ -575,7 +611,7 @@
             padding: 15px;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
         }
 
@@ -593,8 +629,8 @@
             width: 100%;
             text-align: center;
             position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+            transform: scale(0.92);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             color: var(--text-main);
             max-height: 90vh;
             overflow-y: auto;
@@ -609,6 +645,8 @@
             width: 800px;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transform: scale(0.92);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .modal.active .modal-content,
@@ -678,7 +716,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             margin-top: 15px;
             font-weight: 500;
         }
@@ -827,11 +865,15 @@
                         url('Foto/Sejalur Photo-13.JPG') center/cover no-repeat;
             text-align: center;
             border-bottom: none;
+            justify-content: flex-end;
         }
 
         .thankyou-content {
             position: relative;
             z-index: 2;
+            width: 100%;
+            margin-top: auto;
+            margin-bottom: 0;
         }
 
         @keyframes fadeIn {
@@ -1017,28 +1059,28 @@
             <p style="font-size: 0.85rem; color: var(--text-muted);">Momen-momen indah kebersamaan kami</p>
 
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-12.JPG', 'Our Moment 1')">
+                <div class="gallery-item" onclick="openGalleryModal(0)">
                     <img src="Foto/Sejalur Photo-12.JPG" alt="Moment 1">
                 </div>
-                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-13.JPG', 'Our Moment 2')">
+                <div class="gallery-item" onclick="openGalleryModal(1)">
                     <img src="Foto/Sejalur Photo-13.JPG" alt="Moment 2">
                 </div>
-                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-21.JPG', 'Our Moment 3')">
+                <div class="gallery-item" onclick="openGalleryModal(2)">
                     <img src="Foto/Sejalur Photo-21.JPG" alt="Moment 3">
                 </div>
-                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-17.JPG', 'Our Moment 4')">
+                <div class="gallery-item" onclick="openGalleryModal(3)">
                     <img src="Foto/Sejalur Photo-17.JPG" alt="Moment 4">
                 </div>
-                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-65.JPG', 'Our Moment 5')">
+                <div class="gallery-item" onclick="openGalleryModal(4)">
                     <img src="Foto/Sejalur Photo-65.JPG" alt="Moment 5">
                 </div>
-                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-60.JPG', 'Our Moment 6')">
+                <div class="gallery-item" onclick="openGalleryModal(5)">
                     <img src="Foto/Sejalur Photo-60.JPG" alt="Moment 6">
                 </div>
-                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-90.JPG', 'Our Moment 7')">
+                <div class="gallery-item" onclick="openGalleryModal(6)">
                     <img src="Foto/Sejalur Photo-90.JPG" alt="Moment 7">
                 </div>
-                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-91.JPG', 'Our Moment 8')">
+                <div class="gallery-item" onclick="openGalleryModal(7)">
                     <img src="Foto/Sejalur Photo-91.JPG" alt="Moment 8">
                 </div>
             </div>
@@ -1111,6 +1153,7 @@
                 <p style="font-size: 0.9rem; margin: 20px 0; color: var(--text-main);">
                     Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.
                 </p>
+				<h2>وَالسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</h2>
                 <div class="hero-groom-name" style="font-size: 2.5rem; margin-top: 25px;">Aji & Maya</div>
             </div>
         </section>
@@ -1123,9 +1166,11 @@
 
     <!-- Profile & Image Lightbox Modal -->
     <div id="profileModal" class="modal" onclick="closeModal('profileModal')">
-        <div class="modal-content">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="gallery-nav-btn gallery-prev" id="galleryPrevBtn" onclick="changeGalleryImage(-1)">❮</button>
             <h3 id="profileModalTitle">Mempelai</h3>
             <img id="profileModalImg" src="" alt="Profile Image" class="lightbox-img">
+            <button class="gallery-nav-btn gallery-next" id="galleryNextBtn" onclick="changeGalleryImage(1)">❯</button>
         </div>
     </div>
 
@@ -1182,7 +1227,7 @@
         </div>
     </div>
 
-    <!-- Unified Firebase Module Script -->
+    <!-- Unified Firebase Module Script with robust error handling for indexing/permission issues -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
       import { 
@@ -1192,32 +1237,72 @@
         onSnapshot, 
         query, 
         orderBy, 
+        getDocs,
         serverTimestamp 
       } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
       const firebaseConfig = {
-        apiKey: "AIzaSyC-X-zc_gYhytqaKYAPxF5NhP8lcDfm2dk",
-        authDomain: "aji-wedding-database.firebaseapp.com",
-        projectId: "aji-wedding-database",
-        storageBucket: "aji-wedding-database.firebasestorage.app",
-        messagingSenderId: "462386227902",
-        appId: "1:462386227902:web:8df1f0e45923c45cf50cef",
-        measurementId: "G-S39PP5G4XZ"
+        apiKey: "AIzaSyDLgEhUd10NJ2mECWzTzMq0kcjYQC3rcBo",
+        authDomain: "ajimaya-wedding.firebaseapp.com",
+        projectId: "ajimaya-wedding",
+        storageBucket: "ajimaya-wedding.firebasestorage.app",
+        messagingSenderId: "46774258918",
+        appId: "1:46774258918:web:8551c43502003c04b63f27"
       };
 
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
       const commentsRef = collection(db, "comments");
 
-      const q = query(commentsRef, orderBy("timestamp", "desc"));
-      onSnapshot(q, (snapshot) => {
+      // Attempt to load comments with ordering. Fallback to unordered query if index error occurs.
+      function initCommentsListener() {
+        let q;
+        try {
+          q = query(commentsRef, orderBy("timestamp", "desc"));
+        } catch (e) {
+          q = commentsRef;
+        }
+
+        onSnapshot(q, (snapshot) => {
+          renderSnapshots(snapshot);
+        }, (error) => {
+          console.warn("Ordered snapshot failed (likely due to missing index). Falling back to basic collection query...", error);
+          // Fallback listener without orderBy to keep the UI functional
+          onSnapshot(commentsRef, (snapshot) => {
+            renderSnapshots(snapshot);
+          }, (err) => {
+            console.error("Firestore fallback error: ", err);
+            const commentList = document.getElementById('commentList');
+            if (commentList) {
+              commentList.innerHTML = `<div class=\"comment-item\" style=\"color: #c62828;\">Gagal memuat komentar. Periksa aturan keamanan Firestore Anda.</div>`;
+            }
+          });
+        });
+      }
+
+      function renderSnapshots(snapshot) {
         const commentList = document.getElementById('commentList');
         if (!commentList) return;
         
         commentList.innerHTML = '';
-
+        const docs = [];
         snapshot.forEach((doc) => {
-          const data = doc.data();
+          docs.push({ id: doc.id, ...doc.data() });
+        });
+
+        // Client-side sort fallback if timestamp exists, ensuring newest first even if index is building
+        docs.sort((a, b) => {
+          if (!a.timestamp) return 1;
+          if (!b.timestamp) return -1;
+          return b.timestamp.toMillis() - a.timestamp.toMillis();
+        });
+
+        if (docs.length === 0) {
+          commentList.innerHTML = `<div class=\"comment-item\" style=\"text-align: center; color: var(--text-muted);\">Belum ada ucapan. Jadilah yang pertama memberikan ucapan!</div>`;
+          return;
+        }
+
+        docs.forEach((data) => {
           const commentItem = document.createElement('div');
           commentItem.className = 'comment-item';
 
@@ -1225,17 +1310,17 @@
           const badgeClass = isHadir ? 'badge-hadir' : 'badge-absent';
 
           commentItem.innerHTML = `
-            <div class="comment-header">
-                <span class="comment-author">${escapeHTML(data.name || '')}</span>
-                <span class="comment-badge ${badgeClass}">${data.status || 'Hadir'}</span>
+            <div class=\"comment-header\">
+                <span class=\"comment-author\">${escapeHTML(data.name || '')}</span>
+                <span class=\"comment-badge ${badgeClass}\">${escapeHTML(data.status || 'Hadir')}</span>
             </div>
-            <div class="comment-text">${escapeHTML(data.message || '')}</div>
+            <div class=\"comment-text\">${escapeHTML(data.message || '')}</div>
           `;
           commentList.appendChild(commentItem);
         });
-      }, (error) => {
-        console.error("Firestore error: ", error);
-      });
+      }
+
+      initCommentsListener();
 
       window.submitToFirebase = async function(name, status, message) {
         return await addDoc(commentsRef, {
@@ -1249,13 +1334,49 @@
 
     <!-- UI Logic Script -->
     <script>
+    const galleryItems = [
+        { src: 'Foto/Sejalur Photo-12.JPG', title: 'Our Moment 1' },
+        { src: 'Foto/Sejalur Photo-13.JPG', title: 'Our Moment 2' },
+        { src: 'Foto/Sejalur Photo-21.JPG', title: 'Our Moment 3' },
+        { src: 'Foto/Sejalur Photo-17.JPG', title: 'Our Moment 4' },
+        { src: 'Foto/Sejalur Photo-65.JPG', title: 'Our Moment 5' },
+        { src: 'Foto/Sejalur Photo-60.JPG', title: 'Our Moment 6' },
+        { src: 'Foto/Sejalur Photo-90.JPG', title: 'Our Moment 7' },
+        { src: 'Foto/Sejalur Photo-91.JPG', title: 'Our Moment 8' }
+    ];
+
+    let currentGalleryIndex = -1;
+
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
     function openProfileModal(src, name) {
+        currentGalleryIndex = -1;
+        document.getElementById('galleryPrevBtn').style.display = 'none';
+        document.getElementById('galleryNextBtn').style.display = 'none';
         document.getElementById('profileModalImg').src = src;
         document.getElementById('profileModalTitle').innerText = name;
         openModal('profileModal');
+    }
+
+    function openGalleryModal(index) {
+        currentGalleryIndex = index;
+        document.getElementById('galleryPrevBtn').style.display = 'flex';
+        document.getElementById('galleryNextBtn').style.display = 'flex';
+        updateGalleryModal();
+        openModal('profileModal');
+    }
+
+    function changeGalleryImage(direction) {
+        if (currentGalleryIndex === -1) return;
+        currentGalleryIndex = (currentGalleryIndex + direction + galleryItems.length) % galleryItems.length;
+        updateGalleryModal();
+    }
+
+    function updateGalleryModal() {
+        const item = galleryItems[currentGalleryIndex];
+        document.getElementById('profileModalImg').src = item.src;
+        document.getElementById('profileModalTitle').innerText = item.title;
     }
 
     function openVideoModal(videoSrc) {
@@ -1318,17 +1439,25 @@
     document.getElementById('scrollToggle').addEventListener('click', slideNextSection);
 
     function startInvitation() {
-        document.getElementById('cover').classList.add('opened');
+        const cover = document.getElementById('cover');
+        cover.classList.add('opened');
         audio.play().catch(() => console.log("Audio playback blocked by browser."));
+        
+        setTimeout(() => {
+            cover.style.display = 'none';
+        }, 1000);
     }
 
+    /* --- Intersection Observer to Reset and Replay Transition States --- */
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+            } else {
+                entry.target.classList.remove('active');
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.2 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -1347,7 +1476,7 @@
         try {
             await window.submitToFirebase(name, status, message);
             alert('Terima kasih! Ucapan Anda telah tersimpan.');
-            document.getElementById('rsvpForm').reset();
+            document.getElementById('message').value = ''; // clear message input only, keeping name
         } catch (error) {
             console.error("Error saving comment: ", error);
             alert('Gagal menyimpan ucapan. Silakan periksa koneksi atau Firestore rules Anda.\n\nError: ' + error.message);
