@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <!-- Web-accessible icon -->
+    <link rel="icon" type="image/x-icon" href="favicon.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #1f0b0e;
+            --bg-card: #f6f1e9;
+            --cream-overlay: rgba(246, 241, 233, 0.92);
+            --gold: #b89758;
+            --gold-light: #d4b475;
+            --gold-dark: #8c6f34;
+            --text-main: #332219;
+            --text-muted: #77665c;
+            --text-dark: #2b1810;
+            --border-gold: #b89758;
+            --border-gold-light: rgba(184, 151, 88, 0.4);
+            --maroon-dark: #5a121a;
+            --maroon-hover: #7a1b25;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Enabled Scroll Snap for Page/Section Sliding --- */
+        html, body {
+            height: 100%;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        #cover {
+            position: fixed;
+            inset: 0;
+            background: #2a080c url('Foto/Sejalur Photo-17.JPG') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            text-align: center;
+            padding: 15px;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+        }
+
+        #cover::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(15, 5, 8, 0.75) 100%);
+            pointer-events: none;
+        }
+
+        #cover.opened {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .cover-arch-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 410px;
+            background: var(--cream-overlay);
+            border-radius: 200px 200px 0 0;
+            padding: 45px 25px 35px;
+            border: 3px solid var(--gold);
+            outline: 6px solid rgba(246, 241, 233, 0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-main);
+        }
+
+        .cover-script-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #4a2e1b;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .cover-photo-frame {
+            position: relative;
+            width: 200px;
+            height: 240px;
+            border-radius: 120px;
+            border: 2px solid var(--gold);
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
+        }
+
+        .cover-photo-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 115px;
+            object-fit: cover;
+        }
+
+        .cover-names {
+            font-family: 'Cinzel', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .cover-guest-block {
+            margin-bottom: 25px;
+        }
+
+        .cover-guest-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            color: #55443d;
+            font-style: italic;
+        }
+
+        .cover-guest-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 6px 0 4px;
+        }
+
+        .cover-guest-note {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-style: italic;
+            max-width: 260px;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        .btn-buka {
+            background: var(--maroon-dark);
+            color: #f6f1e9;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(90, 18, 26, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-buka:hover {
+            background: var(--maroon-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(90, 18, 26, 0.6);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .ctrl-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--maroon-dark);
+            border: 1px solid var(--gold);
+            color: #f6f1e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .ctrl-btn:hover {
+            background: var(--maroon-hover);
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            border-left: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* --- Section Slide Snapping Styling --- */
+        section {
+            padding: 40px 25px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-gold-light);
+            position: relative;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-section {
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, rgba(246, 241, 233, 0.3) 0%, rgba(246, 241, 233, 0.7) 60%, var(--bg-card) 100%),
+                        url('Foto/Sejalur Photo-13.JPG') center/cover no-repeat;
+            justify-content: space-between;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+        }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(184, 151, 88, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: auto 0;
+        }
+
+        .hero-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #4a2e1b;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: none;
+        }
+
+        .hero-groom-name, .hero-bride-name {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--maroon-dark);
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .hero-ampersand-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .hero-ampersand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #4a2e1b;
+            line-height: 1;
+        }
+
+        .hero-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            letter-spacing: 1.5px;
+            margin-top: 25px;
+            font-weight: 500;
+        }
+
+        .scroll-indicator-wrapper {
+            position: relative;
+            z-index: 2;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .scroll-pill {
+            width: 26px;
+            height: 48px;
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--maroon-dark);
+            font-size: 1rem;
+            box-shadow: 0 0 10px rgba(184, 151, 88, 0.2);
+            animation: bouncePill 2s infinite ease-in-out;
+        }
+
+        @keyframes bouncePill {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        .guest-card-hero {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            border-top: 1px dashed var(--gold);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .disclaimer-text {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--maroon-dark);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--maroon-dark);
+        }
+
+        p.quote {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .subtitle-cover {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #55443d;
+            font-style: italic;
+        }
+
+        .profile-card {
+            margin: 15px 0;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 180px;
+            border-radius: 100px;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            border-color: var(--gold-dark);
+        }
+
+        .person-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            margin-top: 6px;
+        }
+
+        .btn-instagram {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: transparent;
+            color: var(--maroon-dark);
+            border: 1px solid var(--gold);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-instagram:hover {
+            background: var(--maroon-dark);
+            color: #ffffff;
+            border-color: var(--maroon-dark);
+        }
+
+        .btn-instagram svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1.5px solid var(--gold);
+            border-radius: 12px;
+            padding: 15px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .story-card:hover {
+            border-color: var(--gold-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(184, 151, 88, 0.25);
+        }
+
+        .story-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .story-title {
+            font-family: 'Cinzel', serif;
+            color: var(--maroon-dark);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .story-year {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Our Moment Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Expanded & Clickable Video Section */
+        .video-wrapper {
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2.5px solid var(--gold);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            background: #000;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .video-wrapper:hover {
+            transform: scale(1.02);
+            border-color: var(--gold-light);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            max-height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-overlay-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(31, 11, 14, 0.85);
+            color: #f6f1e9;
+            border: 1px solid var(--gold);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 5, 8, 0.88);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            color: var(--text-main);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content-video {
+            background: #000;
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 10px;
+            max-width: 95vw;
+            width: 800px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .modal.active .modal-content,
+        .modal.active .modal-content-video {
+            transform: scale(1);
+        }
+
+        .lightbox-img {
+            width: 100%;
+            max-height: 60vh;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            margin: 15px 0;
+            background: var(--bg-card);
+        }
+
+        .lightbox-video {
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 10px;
+            outline: none;
+            display: block;
+        }
+
+        .modal-text {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .gift-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1.5px solid var(--gold);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+
+        .bank-logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--maroon-dark);
+            font-family: 'Cinzel', serif;
+        }
+
+        .account-number {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin: 6px 0;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--maroon-dark);
+            color: #f6f1e9;
+            border: 1.5px solid var(--gold);
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: var(--maroon-hover);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(90, 18, 26, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-sm {
+            padding: 6px 15px;
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1.5px solid var(--gold);
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 65px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .time-box span {
+            display: block;
+            color: var(--maroon-dark);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .time-box small {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        label {
+            font-size: 0.8rem;
+            color: var(--maroon-dark);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1.5px solid var(--gold);
+            color: var(--text-main);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--maroon-dark);
+        }
+
+        .comment-list {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 350px;
+            overflow-y: auto;
+            text-align: left;
+            padding-right: 5px;
+            width: 100%;
+        }
+
+        .comment-item {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1.5px solid var(--gold);
+            padding: 12px;
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .comment-author {
+            color: var(--maroon-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .comment-badge {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .badge-hadir {
+            background: rgba(46, 125, 50, 0.15);
+            color: #2e7d32;
+            border: 1px solid #2e7d32;
+        }
+
+        .badge-absent {
+            background: rgba(198, 40, 40, 0.15);
+            color: #c62828;
+            border: 1px solid #c62828;
+        }
+
+        .comment-text {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            word-break: break-word;
+        }
+
+        .thankyou-section {
+            position: relative;
+            padding: 60px 25px;
+            background: linear-gradient(180deg, rgba(246, 241, 233, 0.3) 0%, rgba(246, 241, 233, 0.7) 100%), 
+                        url('Foto/Sejalur Photo-13.JPG') center/cover no-repeat;
+            text-align: center;
+            border-bottom: none;
+        }
+
+        .thankyou-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-gold);
+            scroll-snap-align: end;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="Music/musikcut.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="controls">
+        <button class="ctrl-btn" id="musicToggle" title="Toggle Music">🎵</button>
+        <button class="ctrl-btn" id="scrollToggle" title="Next Slide">📜</button>
+    </div>
+
+    <!-- Cover Page -->
+    <div id="cover">
+        <div class="cover-arch-container">
+            <div class="cover-script-title">The Wedding Of</div>
+            
+            <div class="cover-photo-frame">
+                <img src="Foto/Sejalur Photo-13.JPG" alt="Couple Photo">
+            </div>
+
+            <div class="cover-names">AJI & MAYA</div>
+
+            <div class="cover-guest-block">
+                <p class="cover-guest-label">Kepada Yth.</p>
+                <p class="cover-guest-label">Bapak/Ibu/Saudara/i</p>
+                <div class="cover-guest-name" id="guestName">Tamu Undangan</div>
+                <p class="cover-guest-note">*Mohon maaf jika ada kesalahan dalam penulisan nama / gelar.</p>
+            </div>
+
+            <button class="btn-buka" onclick="startInvitation()">
+                <span>✉</span> Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Hero Section -->
+        <section class="reveal hero-section">
+            <div class="hero-content">
+                <div class="hero-subtitle">The Wedding Of</div>
+                <div class="hero-groom-name">AJI</div>
+                <div class="hero-ampersand-wrapper">
+                    <span class="hero-ampersand">&</span>
+                </div>
+                <div class="hero-bride-name">MAYA</div>
+                <div class="hero-date">Senin, 5 Oktober 2026</div>
+
+                <div class="scroll-indicator-wrapper">
+                    <div class="scroll-pill">
+                        <span>↓</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guest-card-hero">
+                <p style="font-size: 0.8rem; color: var(--text-muted);" class="subtitle-cover">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
+                <p id="heroGuestName" style="color: var(--maroon-dark); font-weight: 700; font-size: 1.25rem; margin-top: 6px; font-family: 'Cinzel', serif;">Tamu Undangan</p>
+                <p class="disclaimer-text">*Mohon maaf jika ada kesalahan dalam penulisan nama / gelar.</p>
+            </div>
+        </section>
+
+        <!-- Mempelai Section -->
+        <section class="reveal">
+            <div class="subtitle-cover">Groom & Bride</div>
+            <h2 style="font-size: 1rem; margin-top: 15px;">ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</h2>
+			<p style="font-size: 0.75rem; margin-top: 1px;color: var(--text-muted);">Maha Suci Allah yang telah menciptakan makhluk-</p>
+			<p style="font-size: 0.75rem; margin-top: 1px;color: var(--text-muted);">Nya berpasang-pasangan. Ya Allah semoga ridho-</p>
+			<p style="font-size: 0.75rem; margin-top: 1px;color: var(--text-muted);">Mu tercurah mengiringi pernikahan kami.</p>
+
+            <div class="profile-card">
+                <img src="Foto/Sejalur Photo-39.JPG" alt="Muhajianto" class="profile-img" onclick="openProfileModal(this.src, 'Muhajianto, S.Hum.')">
+                <div class="person-name">Muhajianto, S.Hum.</div>
+                <a href="https://instagram.com/adjieee_03?igsi=NmJxZ3JkazdzaWh5" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    @adjieee_03
+                </a>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">Putra Pertama dari</p>
+				<p style="font-size: 0.75rem; color: var(--text-muted);">Bapak Muhammad Syahruddin</p>
+				<p style="font-size: 0.75rem; color: var(--text-muted);">& Ibu Siti Rahma</p>
+            </div>
+
+            <p style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: #4a2e1b;">&</p>
+
+            <div class="profile-card">
+                <img src="Foto/Sejalur Photo-43.JPG" alt="Gurnita Maya Shofa" class="profile-img" onclick="openProfileModal(this.src, 'Gurnita Maya Shofa, S.H.')">
+                <div class="person-name">Gurnita Maya Shofa, S.H.</div>
+                <a href="https://instagram.com/gurnitamaya?igsi=MW5wa3NqOWJxdTdtbQ%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    @gurnitamaya
+                </a>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">Putri Kedua dari</p>
+				<p style="font-size: 0.75rem; color: var(--text-muted);">Bapak H. Sukari</p>
+				<p style="font-size: 0.75rem; color: var(--text-muted);">& Ibu Hj. Susanah</p>
+            </div>
+            <p class="quote" style="margin-top: 10px;">“Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu....<br><span style="color: var(--maroon-dark); font-size: 0.75rem; font-style: normal; font-weight: 600;">Q.S. Ar-Rum: 21</span></p>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="reveal">
+            <div class="subtitle-cover">Menghitung Hari</div>
+            <div class="hero-groom-name" style="font-size: 2.2rem; margin-top: 5px;">Aji & Maya</div>
+            <p style="color: var(--text-muted); margin-top: 5px;">Senin, 5 Oktober 2026</p>
+
+            <div class="countdown">
+                <div class="time-box"><span id="days">00</span><small>Hari</small></div>
+                <div class="time-box"><span id="hours">00</span><small>Jam</small></div>
+                <div class="time-box"><span id="minutes">00</span><small>Menit</small></div>
+                <div class="time-box"><span id="seconds">00</span><small>Detik</small></div>
+            </div>
+        </section>
+
+        <!-- Acara & Lokasi Section -->
+        <section class="reveal">
+            <h2>Acara & Lokasi</h2>
+
+            <div style="margin-bottom: 25px;">
+                <h3>Akad Nikah</h3>
+                <p style="font-size: 0.9rem; font-weight: 600;">Senin, 5 Oktober 2026</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Pukul 09:00 WIB - Selesai</p>
+            </div>
+
+            <div>
+                <h3>Resepsi</h3>
+                <p style="font-size: 0.9rem; font-weight: 600;">Senin, 5 Oktober 2026</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Pukul 11:00 - Selesai</p>
+                <p style="font-size: 0.85rem; margin-top: 5px;">Rumah Mbah Modin<br>Rt 01/12, Desa Gembong, Kec. Gembong, Kab. Pati</p>
+                <a href="https://www.google.com/maps/place/6%C2%B042'27.3%22S+110%C2%B057'09.3%22E/@-6.7075644,110.9522418,115m/data=!3m1!1e3!4m4!3m3!8m2!3d-6.707578!4d110.952569?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn">Google Maps</a>
+            </div>
+        </section>
+
+        <!-- Love Story Section -->
+        <section class="reveal">
+            <h2>Love Story</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Klik kartu untuk membaca kisah kami</p>
+
+            <div class="story-grid">
+                <div class="story-card" onclick="openModal('modal1')">
+                    <div class="story-icon">☕</div>
+                    <div class="story-title">Pertemuan</div>
+                    <div class="story-year">2024</div>
+                </div>
+                <div class="story-card" onclick="openModal('modal2')">
+                    <div class="story-icon">🌸</div>
+                    <div class="story-title">Pendekatan</div>
+                    <div class="story-year">2025</div>
+                </div>
+                <div class="story-card" onclick="openModal('modal3')">
+                    <div class="story-icon">💍</div>
+                    <div class="story-title">Pertunangan</div>
+                    <div class="story-year">2026</div>
+                </div>
+                <div class="story-card" onclick="openModal('modal4')">
+                    <div class="story-icon">✨</div>
+                    <div class="story-title">Pernikahan</div>
+                    <div class="story-year">2026</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Moment Section (8 Images + Large Video) -->
+        <section class="reveal">
+            <div class="subtitle-cover">Gallery</div>
+            <h2>Our Moments</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Momen-momen indah kebersamaan kami</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-12.JPG', 'Our Moment 1')">
+                    <img src="Foto/Sejalur Photo-12.JPG" alt="Moment 1">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-13.JPG', 'Our Moment 2')">
+                    <img src="Foto/Sejalur Photo-13.JPG" alt="Moment 2">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-21.JPG', 'Our Moment 3')">
+                    <img src="Foto/Sejalur Photo-21.JPG" alt="Moment 3">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-17.JPG', 'Our Moment 4')">
+                    <img src="Foto/Sejalur Photo-17.JPG" alt="Moment 4">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-65.JPG', 'Our Moment 5')">
+                    <img src="Foto/Sejalur Photo-65.JPG" alt="Moment 5">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-60.JPG', 'Our Moment 6')">
+                    <img src="Foto/Sejalur Photo-60.JPG" alt="Moment 6">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-90.JPG', 'Our Moment 7')">
+                    <img src="Foto/Sejalur Photo-90.JPG" alt="Moment 7">
+                </div>
+                <div class="gallery-item" onclick="openProfileModal('Foto/Sejalur Photo-91.JPG', 'Our Moment 8')">
+                    <img src="Foto/Sejalur Photo-91.JPG" alt="Moment 8">
+                </div>
+            </div>
+
+            <!-- Clickable Teaser Video Block -->
+            <div class="video-wrapper" onclick="openVideoModal('Video/teaser.mp4')">
+                <video autoplay loop muted playsinline>
+                    <source src="Video/teaser.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
+            </div>
+        </section>
+
+        <!-- Digital Gift Section -->
+        <section class="reveal">
+            <h2>Wedding Gift</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Doa Restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
+
+            <div class="gift-card">
+                <div class="bank-logo">BANK BCA</div>
+                <div class="account-number" id="accBCA">8715 7636 52</div>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">a.n. Muhajianto</p>
+                <button class="btn btn-sm" onclick="copyToClipboard('8715 7636 52', 'BCA')">Salin No. Rekening</button>
+            </div>
+			<div class="gift-card">
+                <div class="bank-logo">BANK BRI</div>
+                <div class="account-number" id="accBRI">1058 0100 8560 533</div>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">a.n. Gurnita Maya Shofa</p>
+                <button class="btn btn-sm" onclick="copyToClipboard('1058 0100 8560 533', 'BRI')">Salin No. Rekening</button>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section class="reveal">
+            <h2>RSVP</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Konfirmasi kehadiran Anda di bawah ini:</p>
+
+            <form id="rsvpForm" onsubmit="handleRSVP(event)">
+                <div>
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" id="name" required placeholder="Masukkan nama Anda">
+                </div>
+                <div>
+                    <label for="status">Konfirmasi Kehadiran</label>
+                    <select id="status">
+                        <option value="Hadir">Hadir</option>
+                        <option value="Tidak Hadir">Tidak Hadir</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="message">Ucapan & Doa</label>
+                    <textarea id="message" rows="3" placeholder="Tulis ucapan selamat..." required></textarea>
+                </div>
+                <button type="submit" id="submitBtn" class="btn" style="width: 100%;">Kirim RSVP</button>
+            </form>
+        </section>
+
+        <!-- Live Comments Display -->
+        <section class="reveal" id="commentsSection">
+            <h2>Ucapan & Doa</h2>
+            <div class="comment-list" id="commentList">
+                <!-- Real-time Firestore comments render here -->
+            </div>
+        </section>
+
+        <!-- Thank You Section -->
+        <section class="reveal thankyou-section">
+            <div class="thankyou-content">
+                <h2>Terima Kasih</h2>
+                <p style="font-size: 0.9rem; margin: 20px 0; color: var(--text-main);">
+                    Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.
+                </p>
+                <div class="hero-groom-name" style="font-size: 2.5rem; margin-top: 25px;">Aji & Maya</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Aji & Maya Wedding Invitation</p>
+        </footer>
+
+    </div>
+
+    <!-- Profile & Image Lightbox Modal -->
+    <div id="profileModal" class="modal" onclick="closeModal('profileModal')">
+        <div class="modal-content">
+            <h3 id="profileModalTitle">Mempelai</h3>
+            <img id="profileModalImg" src="" alt="Profile Image" class="lightbox-img">
+        </div>
+    </div>
+
+    <!-- Fullscreen Video Lightbox Modal -->
+    <div id="videoModal" class="modal" onclick="closeVideoModal()">
+        <div class="modal-content-video" onclick="event.stopPropagation()">
+            <video id="modalVideoPlayer" class="lightbox-video" autoplay loop muted playsinline>
+                <source src="" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+            </video>
+        </div>
+    </div>
+
+    <!-- Modals for Love Story (1 image per pop up) -->
+    <div id="modal1" class="modal" onclick="closeModal('modal1')">
+        <div class="modal-content">
+            <h3>Pertemuan</h3>
+            <img src="Foto/Sejalur Photo-22.JPG" alt="Pertemuan" class="lightbox-img">
+            <p class="modal-text">Di antara begitu banyak pertemuan yang hadir dalam hidup, 
+			takdir mempertemukan kami pada sebuah cerita sederhana di tahun 2023, saat menjalani KKN. 
+			Tak pernah terlintas bahwa kebersamaan yang bermula begitu biasa, 
+			kelak akan menjadi awal dari sebuah perjalanan yang begitu istimewa. 
+			Dari sana, sebuah kisah perlahan dimulai—tanpa kami tahu ke mana langkahnya akan membawa.</p>
+        </div>
+    </div>
+    <div id="modal2" class="modal" onclick="closeModal('modal2')">
+        <div class="modal-content">
+            <h3>Pendekatan</h3>
+            <img src="Foto/Sejalur Photo-68.JPG" alt="Pendekatan" class="lightbox-img">
+            <p class="modal-text">Waktu kemudian mempertemukan kami dalam jarak yang lebih dekat. Di tahun 2024, 
+			percakapan demi percakapan menjadi jembatan untuk saling mengenal, memahami, dan menemukan kenyamanan. 
+			Perlahan, rasa tumbuh tanpa dipaksa, hingga kami menyadari bahwa ada seseorang yang 
+			ingin terus kami hadirkan dalam setiap cerita dan perjalanan.</p>
+        </div>
+    </div>
+    <div id="modal3" class="modal" onclick="closeModal('modal3')">
+        <div class="modal-content">
+            <h3>Pertunangan</h3>
+            <img src="Foto/Sejalur Photo-80.JPG" alt="Pertunangan" class="lightbox-img">
+            <p class="modal-text">Setelah melewati waktu yang mengajarkan kami tentang arti memahami dan bertumbuh bersama, 
+			tibalah kami pada sebuah keputusan untuk melangkah lebih jauh. Pada April 2026, 
+			dengan doa dan restu keluarga, kami mengikat niat dalam sebuah pertunangan. 
+			Bukan sekadar tentang janji hari ini, melainkan tentang keyakinan untuk berjalan berdampingan menuju hari-hari yang akan datang.</p>
+        </div>
+    </div>
+    <div id="modal4" class="modal" onclick="closeModal('modal4')">
+        <div class="modal-content">
+            <h3>Pernikahan</h3>
+            <img src="Foto/Sejalur Photo-93.JPG" alt="Pernikahan" class="lightbox-img">
+            <p class="modal-text">Dan kini, sampailah kami pada halaman baru yang telah lama kami nantikan. 
+			Pada Oktober 2026, Aji dan Maya akan mengikat dua hati dalam sebuah janji suci pernikahan. 
+			Semoga apa yang bermula dari sebuah pertemuan sederhana, tumbuh menjadi cinta yang senantiasa dijaga, 
+			dan berakhir bukan pada sebuah akhir, melainkan menjadi awal dari perjalanan seumur hidup—bersama, dalam cinta, doa, dan keberkahan.</p>
+        </div>
+    </div>
+
+    <!-- Unified Firebase Module Script -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { 
+        getFirestore, 
+        collection, 
+        addDoc, 
+        onSnapshot, 
+        query, 
+        orderBy, 
+        serverTimestamp 
+      } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyC-X-zc_gYhytqaKYAPxF5NhP8lcDfm2dk",
+        authDomain: "aji-wedding-database.firebaseapp.com",
+        projectId: "aji-wedding-database",
+        storageBucket: "aji-wedding-database.firebasestorage.app",
+        messagingSenderId: "462386227902",
+        appId: "1:462386227902:web:8df1f0e45923c45cf50cef",
+        measurementId: "G-S39PP5G4XZ"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const commentsRef = collection(db, "comments");
+
+      const q = query(commentsRef, orderBy("timestamp", "desc"));
+      onSnapshot(q, (snapshot) => {
+        const commentList = document.getElementById('commentList');
+        if (!commentList) return;
+        
+        commentList.innerHTML = '';
+
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const commentItem = document.createElement('div');
+          commentItem.className = 'comment-item';
+
+          const isHadir = data.status === 'Hadir';
+          const badgeClass = isHadir ? 'badge-hadir' : 'badge-absent';
+
+          commentItem.innerHTML = `
+            <div class="comment-header">
+                <span class="comment-author">${escapeHTML(data.name || '')}</span>
+                <span class="comment-badge ${badgeClass}">${data.status || 'Hadir'}</span>
+            </div>
+            <div class="comment-text">${escapeHTML(data.message || '')}</div>
+          `;
+          commentList.appendChild(commentItem);
+        });
+      }, (error) => {
+        console.error("Firestore error: ", error);
+      });
+
+      window.submitToFirebase = async function(name, status, message) {
+        return await addDoc(commentsRef, {
+          name: name,
+          status: status,
+          message: message,
+          timestamp: serverTimestamp()
+        });
+      };
+    </script>
+
+    <!-- UI Logic Script -->
+    <script>
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    function openProfileModal(src, name) {
+        document.getElementById('profileModalImg').src = src;
+        document.getElementById('profileModalTitle').innerText = name;
+        openModal('profileModal');
+    }
+
+    function openVideoModal(videoSrc) {
+        const modal = document.getElementById('videoModal');
+        const player = document.getElementById('modalVideoPlayer');
+        player.src = videoSrc;
+        modal.classList.add('active');
+        player.play();
+    }
+
+    function closeVideoModal() {
+        const modal = document.getElementById('videoModal');
+        const player = document.getElementById('modalVideoPlayer');
+        player.pause();
+        player.src = "";
+        modal.classList.remove('active');
+    }
+
+    function copyToClipboard(text, bank) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert(`No. Rekening ${bank} (${text}) berhasil disalin!`);
+        });
+    }
+
+    // Dynamic guest name parsing from URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const guest = params.get('to') || params.get('nama') || params.get('guest');
+
+    if (guest) {
+        const decodedGuest = decodeURIComponent(guest.replace(/\+/g, ' '));
+        const guestNameCover = document.getElementById('guestName');
+        const guestNameHero = document.getElementById('heroGuestName');
+        const rsvpInput = document.getElementById('name');
+
+        if (guestNameCover) guestNameCover.innerText = decodedGuest;
+        if (guestNameHero) guestNameHero.innerText = decodedGuest;
+        if (rsvpInput) rsvpInput.value = decodedGuest;
+    }
+
+    /* --- Slide per Section Button Action --- */
+    function slideNextSection() {
+        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    }
+
+    const audio = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicToggle');
+
+    musicBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            musicBtn.innerText = '🎵';
+        } else {
+            audio.pause();
+            musicBtn.innerText = '🔇';
+        }
+    });
+
+    document.getElementById('scrollToggle').addEventListener('click', slideNextSection);
+
+    function startInvitation() {
+        document.getElementById('cover').classList.add('opened');
+        audio.play().catch(() => console.log("Audio playback blocked by browser."));
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    async function handleRSVP(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const name = document.getElementById('name').value.trim();
+        const status = document.getElementById('status').value;
+        const message = document.getElementById('message').value.trim();
+
+        if (!name || !message) return;
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Sending...';
+
+        try {
+            await window.submitToFirebase(name, status, message);
+            alert('Terima kasih! Ucapan Anda telah tersimpan.');
+            document.getElementById('rsvpForm').reset();
+        } catch (error) {
+            console.error("Error saving comment: ", error);
+            alert('Gagal menyimpan ucapan. Silakan periksa koneksi atau Firestore rules Anda.\n\nError: ' + error.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'Kirim RSVP';
+        }
+    }
+
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, tag => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+        }[tag] || tag));
+    }
+
+    const targetDate = new Date("Oct 5, 2026 09:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff > 0) {
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }
+    }, 1000);
+    </script>
+</body>
+</html>
