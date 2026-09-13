@@ -1280,20 +1280,22 @@
         });
     }
 
-    // Dynamic guest name parsing from URL parameters
-    const params = new URLSearchParams(window.location.search);
-    const guest = params.get('to') || params.get('nama') || params.get('guest');
+    // Dynamic guest name parsing from URL parameters (Wrapped in DOMContentLoaded)
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const guest = params.get('to') || params.get('nama') || params.get('guest');
 
-    if (guest) {
-        const decodedGuest = decodeURIComponent(guest.replace(/\+/g, ' '));
-        const guestNameCover = document.getElementById('guestName');
-        const guestNameHero = document.getElementById('heroGuestName');
-        const rsvpInput = document.getElementById('name');
+        if (guest) {
+            const decodedGuest = decodeURIComponent(guest.replace(/\+/g, ' '));
+            const guestNameCover = document.getElementById('guestName');
+            const guestNameHero = document.getElementById('heroGuestName');
+            const rsvpInput = document.getElementById('name');
 
-        if (guestNameCover) guestNameCover.innerText = decodedGuest;
-        if (guestNameHero) guestNameHero.innerText = decodedGuest;
-        if (rsvpInput) rsvpInput.value = decodedGuest;
-    }
+            if (guestNameCover) guestNameCover.innerText = decodedGuest;
+            if (guestNameHero) guestNameHero.innerText = decodedGuest;
+            if (rsvpInput) rsvpInput.value = decodedGuest;
+        }
+    });
 
     /* --- Slide per Section Button Action --- */
     function slideNextSection() {
